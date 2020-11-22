@@ -22,6 +22,16 @@ namespace TddChessEngineLib
         // 6. Длина шага 2 или 1
         public void Turn(string startPosition, string finalPosition)
         {
+            if (FigureColor == FigureColor.Black)
+            {
+                if (Convert.ToInt32(CurrentPosition[1]) < Convert.ToInt32(finalPosition[1]))
+                {
+                    CurrentPosition = finalPosition;
+                }
+
+                return;
+            }
+
             CurrentPosition = finalPosition;
         }
     }
