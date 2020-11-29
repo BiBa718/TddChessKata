@@ -2,10 +2,17 @@
 
 namespace TddChessEngineLib
 {
+    // возможность первого хода
+    // 1. Есть ли кто-то в точке назначения
+    // 2. Границы карты
+    // 3. Направление
+    // 4. Ввести переменную сходила ли пешка или нет
+    // 5. (пока за скобки) Живая или нет
+    // 6. Длина шага 2 или 1
     public class Pawn
     {
-        public string CurrentPosition {get; private set;}
-        public FigureColor FigureColor {get;}
+        public string CurrentPosition { get; private set; }
+        public FigureColor FigureColor { get; }
 
         public Pawn(string initialPosition, FigureColor figureColor)
         {
@@ -13,30 +20,39 @@ namespace TddChessEngineLib
             FigureColor = figureColor;
         }
 
-        // возможность первого хода
-        // 1. Если кто-то в точке назначения
-        // 2. Граница карты
-        // 3. Направления
-        // 4. Ввести переменную сходила ли пешка или нет
-        // 5. (жива или нет)
-        // 6. Длина шага 2 или 1
         public void Turn(string startPosition, string finalPosition)
         {
-            if (FigureColor == FigureColor.Black)
-            {
-                if (Convert.ToInt32(CurrentPosition[1]) < Convert.ToInt32(finalPosition[1]))
-                {
-                    CurrentPosition = finalPosition;
-                }
+            var startLine = Convert.ToInt32(startPosition[1].ToString());
+            var finalLine = Convert.ToInt32(finalPosition[1].ToString());
 
-                return;
+            // код хода для чёрной фигуры
+            if(FigureColor == FigureColor.Black)
+            {
+                if(finalLine < startLine)
+                {
+                    CurrentPosition = finalPosition;    
+                }
+                
+                throw new ArgumentException("Black Pawn can't go back");
             }
 
-            CurrentPosition = finalPosition;
+            // если пешка оказалась на 5 линиии то это точно не могло произойти в результате прыжка
+            if (finalLine >= 5 && finalLine - startLine > 1)
+            {
+                throw new ArgumentException("White Pawn can't go back");
+            }
+
+            if(finalLine > startLine)
+            {
+                CurrentPosition = finalPosition;
+                return;    
+            }
+
+            throw new ArgumentException("White Pawn can't go back");
         }
     }
 
-    public enum FigureColor
+    public enum FigureColor 
     {
         White,
         Black
