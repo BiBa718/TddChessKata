@@ -1,3 +1,4 @@
+using System;
 using Xunit;
 using TddChessEngineLib;
 
@@ -10,7 +11,6 @@ namespace TddChessEngineLibTests
         {
             string startPosition = "E2";
             Elephant el = new Elephant(startPosition);
-            el.Turn(startPosition);
             Assert.Equal(startPosition, el.CurrentPosition);
         }
 
@@ -19,8 +19,13 @@ namespace TddChessEngineLibTests
         {
             string startPosition = "E9";
             Elephant el = new Elephant(startPosition);
-            el.Turn(startPosition);
-            Assert.Equal(startPosition, el.CurrentPosition);
+            Assert.Throws<ArgumentException>(() => el.CurrentPosition);
+        }
+
+        [Fact]
+        public void WhenElephantTurnFromE2ToE3_ThenItThrowsArgumentException()
+        {
+
         }
     }
 }
