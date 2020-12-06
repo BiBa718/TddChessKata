@@ -21,11 +21,5 @@ namespace TddChessEngineLibTests
             Elephant el = new Elephant(startPosition);
             Assert.Throws<ArgumentException>(() => el.CurrentPosition);
         }
-
-        [Fact]
-        public void WhenElephantTurnFromE2ToE3_ThenItThrowsArgumentException()
-        {
-
-        }
     }
 }
