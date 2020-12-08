@@ -6,7 +6,8 @@ namespace TddChessEngineLibTests
 {
     public class ElephantTests
     {
-        string startPosition;
+        public string startPosition;
+        public string finalPosition;
 
         [Fact]
         public void WhenCreatingElephantOnE2_ThenItCurrentPositionE2()
@@ -35,7 +36,19 @@ namespace TddChessEngineLibTests
         [Fact]
         public void WhenElephantTurnFromE2ToE3_ThenItThrowsArgumentException()
         {
-            
+            startPosition = "E2";
+            finalPosition = "E3";
+            Assert.Throws<ArgumentException>(() => new Elephant(startPosition).Turn(finalPosition));
+        }
+
+        [Fact]
+        public void WhenElephantTurnFromE2ToF3_ThenItChangesPosition()
+        {
+            startPosition = "E2";
+            finalPosition = "E3";
+            Elephant el = new Elephant(startPosition);
+            el.Turn(finalPosition);
+            Assert.Equal(finalPosition, el.CurrentPosition);
         }
     }
 }
