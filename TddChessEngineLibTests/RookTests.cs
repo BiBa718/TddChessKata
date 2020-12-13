@@ -1,3 +1,4 @@
+using System;
 using Xunit;
 using TddChessEngineLib;
 
@@ -12,6 +13,20 @@ namespace TddChessEngineLibTests
         {
             startPosition = "A1";
             Assert.Equal(startPosition, new Rook(startPosition).CurrentPosition);
+        }
+
+        [Fact]
+        public void WhenRookCreatedOnA9_ThenItThrowExeption()
+        {
+            startPosition = "A9";
+            Assert.Throws<ArgumentException>(() => new Rook(startPosition).CurrentPosition);
+        }
+
+        [Fact]
+        public void WhenRookCreatedOnP1_ThenItThrowExeption()
+        {
+            startPosition = "P1";
+            Assert.Throws<ArgumentException>(() => new Rook(startPosition).CurrentPosition);
         }
     }
 }
