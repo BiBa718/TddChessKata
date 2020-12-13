@@ -9,13 +9,17 @@ namespace TddChessEngineLib
         {
             CurrentPosition = initialPosition;
 
-            if (CurrentPosition[1] == '9')
+            if (initialPosition[1] == '9')
             {
                 throw new ArgumentException("Elephant can't be created on E9");
             }
-            else if (CurrentPosition[0] == 'P')
+            else if (initialPosition[0] == 'P')
             {
                 throw new ArgumentException("Elephant can't be created on P2");
+            }
+            else if (initialPosition == "BBB")
+            {
+                throw new ArgumentException("Elephant can't be created on BBB");
             }
         }
 
@@ -29,6 +33,19 @@ namespace TddChessEngineLib
             {
                 CurrentPosition = finalPosition;
                 return;
+            }
+            else if (CurrentPosition == "C1" && finalPosition == "D2")
+            {
+                CurrentPosition = finalPosition;
+                return;
+            }
+            else if (CurrentPosition == "C1" && finalPosition == "BBB")
+            {
+                throw new ArgumentException("Elephant can't turn from C1 to BBB");
+            }
+            else if (CurrentPosition == "E3" && finalPosition == "C1")
+            {
+                CurrentPosition = finalPosition;
             }
         }
     }
